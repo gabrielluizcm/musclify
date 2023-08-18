@@ -45,6 +45,17 @@ async function create(props: NewUserProps) {
   });
 }
 
+async function login(props: { email: string, password: string }) {
+  const { email, password } = props;
+  const user = await UserModel.findOne({ email });
+
+  if (!user) return;
+
+  if (!bcryptjs.compareSync(password, user.password)) return;
+
+  return user;
+}
+
 async function validate(props: NewUserProps) {
   const errors = [];
   const { username, email, password, confirmPassword, name } = props;
@@ -61,4 +72,4 @@ async function validate(props: NewUserProps) {
   return errors;
 }
 
-export { create, validate };
+export default { create, validate, login };
