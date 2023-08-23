@@ -23,16 +23,19 @@ const exerciseSchema = new Schema<ExerciseInterface>({
   reps: { type: Number },
   time: { type: Number },
   i18n: {
-    en: {
-      title: { type: String, required: true },
-      desc: { type: String, required: true },
-      tags: { type: Array, required: true }
+    type: {
+      en: {
+        title: { type: String, required: true },
+        desc: { type: String, required: true },
+        tags: { type: Array, required: true }
+      },
+      pt: {
+        title: { type: String, required: true },
+        desc: { type: String, required: true },
+        tags: { type: Array, required: true }
+      }
     },
-    pt: {
-      title: { type: String, required: true },
-      desc: { type: String, required: true },
-      tags: { type: Array, required: true }
-    }
+    required: true
   },
   picture_id: { type: String }
 });
@@ -52,5 +55,4 @@ async function create({ i18n }: NewExerciseProps) {
     i18n
   });
 }
-
 export default { create };
