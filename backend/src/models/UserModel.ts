@@ -45,15 +45,21 @@ async function create(props: NewUserProps) {
   });
 }
 
-async function login(props: { email: string, password: string }) {
+export type UserJwtType = {
+  id: string;
+  name: string;
+  email: string;
+}
+
+async function login(props: { email: string, password: string }): Promise<UserJwtType | false> {
   const { email, password } = props;
   const user = await UserModel.findOne({ email });
 
-  if (!user) return;
+  if (!user) return false;
 
-  if (!bcryptjs.compareSync(password, user.password)) return;
+  if (!bcryptjs.compareSync(password, user.password)) return false;
 
-  return user;
+  return { id: user.id, name: user.name, email: user.email };
 }
 
 async function validate(props: NewUserProps) {
@@ -72,4 +78,8 @@ async function validate(props: NewUserProps) {
   return errors;
 }
 
-export default { create, validate, login };
+async function findById(id: string): Promise<UserInterface | null> {
+  return UserModel.findOne({ _id: id });
+}
+
+export default { create, validate, login, findById };

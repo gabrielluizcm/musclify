@@ -8,11 +8,10 @@ type ExerciseI18nType = {
 }
 
 interface ExerciseInterface extends Document {
-  name: string;
   weight?: number;
   reps?: number;
   time?: number;
-  i18n?: {
+  i18n: {
     en: ExerciseI18nType;
     pt: ExerciseI18nType;
   }
@@ -20,12 +19,10 @@ interface ExerciseInterface extends Document {
 }
 
 const exerciseSchema = new Schema<ExerciseInterface>({
-  name: { type: String, required: true },
   weight: { type: Number },
   reps: { type: Number },
   time: { type: Number },
   i18n: {
-    required: false,
     en: {
       title: { type: String, required: true },
       desc: { type: String, required: true },
@@ -43,7 +40,6 @@ const exerciseSchema = new Schema<ExerciseInterface>({
 const ExerciseModel = mongoose.model<ExerciseInterface>('Exercise', exerciseSchema);
 
 export type NewExerciseProps = {
-  name: string;
   i18n: {
     en: ExerciseI18nType;
     pt: ExerciseI18nType;
@@ -51,10 +47,9 @@ export type NewExerciseProps = {
   picture_base64?: string;
 }
 
-async function create(props: NewExerciseProps) {
-  const { name, i18n } = props;
+async function create({ i18n }: NewExerciseProps) {
   return await ExerciseModel.create({
-    name, i18n
+    i18n
   });
 }
 
