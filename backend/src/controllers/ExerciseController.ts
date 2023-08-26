@@ -4,7 +4,9 @@ import Exercise, { NewExerciseProps } from '../models/ExerciseModel';
 
 async function create(req: Request<object, object, NewExerciseProps>, res: Response) {
   try {
-    // todo input validation and image upload
+    if (!req.body.pictureBase64)
+      return res.status(500).json({ message: 'Picture file not available' });
+
     const exercise = await Exercise.create(req.body);
 
     return res.status(201).json({ message: 'Exercise created succesfully', exercise });

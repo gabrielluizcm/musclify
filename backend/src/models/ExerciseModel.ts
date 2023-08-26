@@ -1,5 +1,7 @@
 import { Schema, Document } from 'mongoose';
+
 import mongoose from '../config/database';
+import { upload } from '../config/pictures';
 
 type ExerciseI18nType = {
   title: string;
@@ -15,7 +17,7 @@ interface ExerciseInterface extends Document {
     en: ExerciseI18nType;
     pt: ExerciseI18nType;
   }
-  picture_id?: string;
+  pictureName: string;
 }
 
 const exerciseSchema = new Schema<ExerciseInterface>({
@@ -37,7 +39,7 @@ const exerciseSchema = new Schema<ExerciseInterface>({
     },
     required: true
   },
-  picture_id: { type: String }
+  pictureName: { type: String, required: true }
 });
 
 const ExerciseModel = mongoose.model<ExerciseInterface>('Exercise', exerciseSchema);
@@ -47,12 +49,13 @@ export type NewExerciseProps = {
     en: ExerciseI18nType;
     pt: ExerciseI18nType;
   };
-  picture_base64?: string;
+  pictureBase64: string;
 }
 
-async function create({ i18n }: NewExerciseProps) {
+async function create({ i18n, pictureBase64 }: NewExerciseProps) {
+  const pictureName = upload(pictureBase64, 'exercises');
   return await ExerciseModel.create({
-    i18n
+    i18n, pictureName
   });
 }
 export default { create };

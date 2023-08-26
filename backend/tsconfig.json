@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "typeRoots": [
       "./node_modules/@types",
-      "custom_typings"
+      "custom-typings/*.d.ts"
     ]
   },
   "exclude": [
