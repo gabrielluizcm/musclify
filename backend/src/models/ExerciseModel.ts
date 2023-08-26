@@ -1,7 +1,7 @@
 import { Schema, Document } from 'mongoose';
 
 import mongoose from '../config/database';
-import { upload } from '../config/pictures';
+import { download, upload } from '../config/pictures';
 
 type ExerciseI18nType = {
   title: string;
@@ -18,6 +18,7 @@ interface ExerciseInterface extends Document {
     pt: ExerciseI18nType;
   }
   pictureName: string;
+  pictureData64?: string;
 }
 
 const exerciseSchema = new Schema<ExerciseInterface>({
@@ -58,4 +59,23 @@ async function create({ i18n, pictureBase64 }: NewExerciseProps) {
     i18n, pictureName
   });
 }
-export default { create };
+
+async function fetchAll() {
+  const exercises = await ExerciseModel.find().lean().exec();
+  // todo optimization
+  exercises.forEach((exercise) => {
+    const pictureData64 = download(exercise.pictureName, 'exercises');
+    exercise.pictureData64 = pictureData64;
+  })
+  return exercises;
+}
+
+async function fetchOne(id: string = '') {
+  const exercise = await ExerciseModel.findById(id).lean().exec();
+  if (!exercise) return false;
+  const pictureData64 = download(exercise.pictureName, 'exercises');
+  exercise.pictureData64 = pictureData64
+  return exercise;
+}
+
+export default { create, fetchAll, fetchOne };
