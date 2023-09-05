@@ -20,8 +20,8 @@ const userSchema = new Schema<UserInterface>({
   password: { type: String, required: true },
   role: { type: String, required: true },
   name: { type: String, required: true },
-  age: { type: Number },
-  weight: { type: Number },
+  age: Number,
+  weight: Number,
 });
 
 const UserModel = mongoose.model<UserInterface>('User', userSchema);
@@ -79,7 +79,7 @@ async function validate(props: NewUserProps) {
 }
 
 async function findById(id: string): Promise<UserInterface | null> {
-  return UserModel.findOne({ _id: id });
+  return UserModel.findById(id);
 }
 
 export default { create, validate, login, findById };

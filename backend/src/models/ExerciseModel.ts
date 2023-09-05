@@ -22,9 +22,9 @@ interface ExerciseInterface extends Document {
 }
 
 const exerciseSchema = new Schema<ExerciseInterface>({
-  weight: { type: Number },
-  reps: { type: Number },
-  time: { type: Number },
+  weight: Number,
+  reps: Number,
+  time: Number,
   i18n: {
     type: {
       en: {

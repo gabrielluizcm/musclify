@@ -24,7 +24,7 @@ async function create(req: Request<object, object, NewExerciseProps>, res: Respo
   }
 }
 
-async function fetch(req: Request<{ id: string }, object>, res: Response) {
+async function fetch(req: Request<{ id: string }>, res: Response) {
   try {
     const exercise = await Exercise.fetchOne(req.params.id);
     if (!exercise)
