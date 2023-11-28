@@ -1,47 +1,30 @@
-import { Schema, Document } from 'mongoose';
+import { PrismaClient } from '@prisma/client';
 import validator from 'validator';
 import bcryptjs from 'bcryptjs';
 
-import mongoose from '../config/database';
-
-interface UserInterface extends Document {
-  username: string;
-  email: string;
-  password: string;
-  role: string;
-  name: string;
-  age?: string;
-  weight?: string;
-}
-
-const userSchema = new Schema<UserInterface>({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  role: { type: String, required: true },
-  name: { type: String, required: true },
-  age: Number,
-  weight: Number,
-});
-
-const UserModel = mongoose.model<UserInterface>('User', userSchema);
+const prisma = new PrismaClient();
 
 export type NewUserProps = {
-  username: string;
+  id: string;
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  name: string;
+  age?: number;
+  weight?: number;
 }
 
 async function create(props: NewUserProps) {
-  const { username, email, password, name } = props;
-  const salt = bcryptjs.genSaltSync();
-  const cryptPassword = bcryptjs.hashSync(password, salt);
-  return await UserModel.create({
-    username, email, name,
-    role: 'user',
-    password: cryptPassword
+  const { name, email, password, age, weight } = props;
+  const cryptPassword = bcryptjs.hashSync(password, 8);
+  return await prisma.user.create({
+    data: {
+      name,
+      email,
+      age,
+      weight,
+      password: cryptPassword
+    }
   });
 }
 
@@ -53,7 +36,17 @@ export type UserJwtType = {
 
 async function login(props: { email: string, password: string }): Promise<UserJwtType | false> {
   const { email, password } = props;
-  const user = await UserModel.findOne({ email });
+  const user = await prisma.user.findUnique({
+    where: {
+      email
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      password: true
+    }
+  });
 
   if (!user) return false;
 
@@ -64,22 +57,21 @@ async function login(props: { email: string, password: string }): Promise<UserJw
 
 async function validate(props: NewUserProps) {
   const errors = [];
-  const { username, email, password, confirmPassword, name } = props;
+  const { email, password, confirmPassword, name } = props;
 
-  if (username.length < 3 || username.length > 30) errors.push('Invalid name: must have between 3 and 30 characters');
   if (!validator.isEmail(email)) errors.push('Invalid email');
   if (password.length < 6 || password.length > 18) errors.push('Invalid password: must have between 6 and 18 characters');
   if (password !== confirmPassword) errors.push('Passwords must match');
   if (!name.length || name.length > 36) errors.push('Invalid name: must have and least 1 character and 36 max');
 
-  if (!errors.length && await UserModel.findOne({ email }))
+  if (!errors.length && await prisma.user.count({ where: { email } }))
     errors.push('Email already registered');
 
   return errors;
 }
 
-async function findById(id: string): Promise<UserInterface | null> {
-  return UserModel.findById(id);
+async function findById(id: string) {
+  return prisma.user.findUnique({ where: { id } });
 }
 
 export default { create, validate, login, findById };
