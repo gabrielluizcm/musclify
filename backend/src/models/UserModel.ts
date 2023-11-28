@@ -37,9 +37,7 @@ export type UserJwtType = {
 async function login(props: { email: string, password: string }): Promise<UserJwtType | false> {
   const { email, password } = props;
   const user = await prisma.user.findUnique({
-    where: {
-      email
-    },
+    where: { email },
     select: {
       id: true,
       name: true,
@@ -74,4 +72,17 @@ async function findById(id: string) {
   return prisma.user.findUnique({ where: { id } });
 }
 
-export default { create, validate, login, findById };
+async function loadUserWithRoutines(id: string) {
+  return prisma.user.findUnique({
+    where: { id },
+    include: {
+      Routines: {
+        include: {
+          Exercises: true
+        }
+      }
+    }
+  })
+}
+
+export default { create, validate, login, findById, loadUserWithRoutines };

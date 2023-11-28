@@ -24,7 +24,19 @@ async function login(req: Request<object, object, { email: string, password: str
       return res.status(401).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign(user, process.env.SECRET_JWT_KEY ?? '');
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
+async function fetchUserWithRoutines(req: Request, res: Response) {
+  try {
+    const userWithRoutines = await User.loadUserWithRoutines(req.body.user.id)
+    if (!userWithRoutines)
+      return res.status(404).json({ message: 'User not found' });
+
+    return res.status(200).json({ userWithRoutines });
   } catch (error) {
     return res.status(500).json({ error });
   }
@@ -32,5 +44,6 @@ async function login(req: Request<object, object, { email: string, password: str
 
 export default {
   register,
-  login
+  login,
+  fetchUserWithRoutines
 }

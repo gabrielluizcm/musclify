@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import Routine, { RoutineInterface } from '../models/RoutineModel';
+import Routine from '../models/RoutineModel';
 
-async function create(req: Request<object, object, RoutineInterface>, res: Response) {
+async function create(req: Request, res: Response) {
   try {
     const errors = await Routine.validate(req.body);
     if (errors.length)

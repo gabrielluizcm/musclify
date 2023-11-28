@@ -20,7 +20,7 @@ model User {
   weight     Float?
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
-  Routine    Routine[]
+  Routines   Routine[]
 }
 
 model Routine {
