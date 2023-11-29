@@ -8,7 +8,8 @@ export default {
     extend: {},
     fontFamily: {
       'montserrat': ['Montserrat', 'sans-serif'],
-      'roboto': ['Roboto', 'ui-monospace']
+      'roboto': ['Roboto Condensed', 'ui-monospace'],
+      'graduate': ['Graduate', 'serif']
     },
     colors: {
       'pine-tree': '#2d2727',

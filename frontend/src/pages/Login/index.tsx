@@ -10,13 +10,17 @@ export default function LoginPage() {
   }
 
   return (
-    <section className='w-full h-full flex flex-col items-center justify-center'>
-      <h1 className='text-3xl text-salmon font-montserrat mb-3'>Musclify</h1>
+    <section className='w-1/2 md:w-1/5 h-full flex flex-col items-center justify-center'>
+      <h1 className='text-3xl text-salmon font-graduate mb-3'>Musclify</h1>
       <StyledForm.Form>
         <StyledForm.Input type='email' value={email} onChange={evt => setEmail(evt.currentTarget.value)} placeholder='email' />
         <StyledForm.Input type='password' value={password} onChange={evt => setPassword(evt.currentTarget.value)} placeholder='senha' />
-        <StyledForm.Button onClick={handleSubmitClick}>Login</StyledForm.Button>
+        <StyledForm.Button onClick={handleSubmitClick}>LOGIN</StyledForm.Button>
       </StyledForm.Form>
+      <div className="w-full flex justify-between mt-3">
+        <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo">nova conta</a>
+        <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo">esqueci minha senha</a>
+      </div>
     </section>
   )
 }

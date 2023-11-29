@@ -4,7 +4,7 @@ type StyledFormFormProps = {
 
 export default function StyledFormForm(props: StyledFormFormProps) {
   return (
-    <form className="w-1/2 md:w-1/5 flex flex-col gap-1">
+    <form className="w-full flex flex-col gap-1 font-roboto">
       {props.children}
     </form>
   )
