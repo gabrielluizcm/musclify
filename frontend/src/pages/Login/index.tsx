@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import { StyledForm } from '../../components/StyledForm';
+import NavMenu from '../../components/NavMenu';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -18,9 +20,10 @@ export default function LoginPage() {
         <StyledForm.Button type='submit'>LOGIN</StyledForm.Button>
       </StyledForm.Form>
       <div className="w-full flex justify-between mt-3">
-        <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo">nova conta</a>
-        <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo">esqueci minha senha</a>
+        <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo transition-all">nova conta</a>
+        <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo transition-all">esqueci minha senha</a>
       </div>
+      <NavMenu />
     </section>
   )
 }
