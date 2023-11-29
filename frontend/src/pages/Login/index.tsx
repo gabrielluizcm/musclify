@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { StyledForm } from '../../components/StyledForm';
-import NavMenu from '../../components/NavMenu';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -12,7 +11,7 @@ export default function LoginPage() {
   }
 
   return (
-    <section className='w-1/2 md:w-1/5 h-full flex flex-col items-center justify-center'>
+    <main className='w-1/2 md:w-1/5 h-full flex flex-col items-center justify-center'>
       <h1 className='text-3xl text-salmon font-graduate mb-3'>Musclify</h1>
       <StyledForm.Form onSubmit={handleSubmitClick}>
         <StyledForm.Input type='email' value={email} onChange={evt => setEmail(evt.currentTarget.value)} placeholder='email' />
@@ -23,7 +22,6 @@ export default function LoginPage() {
         <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo transition-all">nova conta</a>
         <a href="#" className="text-salmon font-roboto text-sm hover:text-lavander-indigo transition-all">esqueci minha senha</a>
       </div>
-      <NavMenu />
-    </section>
+    </main>
   )
 }
