@@ -69,11 +69,11 @@ export default function Home() {
         </RoutineCard.Main>
         <RoutineCard.Details>
           <RoutineCard.Detail>
-            {todaysRoutine.exerciseCount > 1
-              ? todaysRoutine.exerciseCount + ' exercícios'
-              : todaysRoutine.exerciseCount + ' exercício'}
+            {todaysRoutine.exerciseCount} {todaysRoutine.exerciseCount > 1 ? 'exercícios' : 'exercício'}
           </RoutineCard.Detail>
-          <RoutineCard.Detail>{'Est.: ' + todaysRoutine.estimatedMinutes.toString() + ' min'}</RoutineCard.Detail>
+          <RoutineCard.Detail>
+            Est.: {todaysRoutine.estimatedMinutes} min
+          </RoutineCard.Detail>
         </RoutineCard.Details>
         <RoutineCard.Actions>
           <RoutineCard.Action type="start" to="#" />
@@ -88,7 +88,9 @@ export default function Home() {
               <RoutineCard.Description>{routine.description}</RoutineCard.Description>
             </RoutineCard.Main>
             <RoutineCard.Details>
-              <RoutineCard.Detail>{routine.date + ' - ' + routine.minutesElapsed + ' min'}</RoutineCard.Detail>
+              <RoutineCard.Detail>
+                {routine.date} - {routine.minutesElapsed} min
+              </RoutineCard.Detail>
             </RoutineCard.Details>
           </RoutineCard.Card>
         )}
