@@ -1,13 +1,14 @@
 type RoutineCardCardProps = {
   active: boolean;
+  as: 'div' | 'li';
   children: React.ReactNode
 }
 
-export default function RoutineCardCard({ active, children }: RoutineCardCardProps) {
+export default function RoutineCardCard({ active, children, as: As }: RoutineCardCardProps) {
   return (
-    <div className={`w-full rounded-lg text-salmon p-1 flex align-center justify-center
-      ${active ? 'bg-lavander-indigo' : 'bg-onyx'}`}>
+    <As className={`w-full rounded-lg px-5 py-2 text-salmon flex align-center justify-around
+     font-roboto ${active ? 'bg-lavander-indigo' : 'bg-onyx'}`}>
       {children}
-    </div>
+    </As>
   );
 }
