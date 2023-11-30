@@ -1,5 +1,5 @@
-import NavMenu from "../../components/NavMenu";
 import { RoutineCard } from "../../components/RoutineCard";
+import NavMenu from "../../components/NavMenu";
 
 function Weekdays() {
   const daysDic = [
@@ -59,43 +59,45 @@ export default function Home() {
     }
   ]
   return (
-    <main className="h-full w-full md:w-1/3 flex flex-col gap-3 py-5">
-      <Weekdays />
-      <h2 className="font-montserrat text-xl text-light-silver">Treino do dia:</h2>
-      <RoutineCard.Card as="div" active>
-        <RoutineCard.Main>
-          <RoutineCard.Title>{todaysRoutine.title}</RoutineCard.Title>
-          <RoutineCard.Description>{todaysRoutine.description}</RoutineCard.Description>
-        </RoutineCard.Main>
-        <RoutineCard.Details>
-          <RoutineCard.Detail>
-            {todaysRoutine.exerciseCount} {todaysRoutine.exerciseCount > 1 ? 'exercícios' : 'exercício'}
-          </RoutineCard.Detail>
-          <RoutineCard.Detail>
-            Est.: {todaysRoutine.estimatedMinutes} min
-          </RoutineCard.Detail>
-        </RoutineCard.Details>
-        <RoutineCard.Actions>
-          <RoutineCard.Action type="start" to="#" />
-        </RoutineCard.Actions>
-      </RoutineCard.Card>
-      <h2 className="font-montserrat text-xl text-light-silver">Histórico de treinos:</h2>
-      <ul className="flex flex-col gap-2">
-        {routinesHistory.map(routine =>
-          <RoutineCard.Card as="li" active={false}>
-            <RoutineCard.Main>
-              <RoutineCard.Title>{routine.title}</RoutineCard.Title>
-              <RoutineCard.Description>{routine.description}</RoutineCard.Description>
-            </RoutineCard.Main>
-            <RoutineCard.Details>
-              <RoutineCard.Detail>
-                {routine.date} - {routine.minutesElapsed} min
-              </RoutineCard.Detail>
-            </RoutineCard.Details>
-          </RoutineCard.Card>
-        )}
-      </ul>
+    <>
+      <main className="h-full w-full md:w-1/3 flex flex-col gap-3 py-5">
+        <Weekdays />
+        <h2 className="font-montserrat text-xl text-light-silver">Treino do dia:</h2>
+        <RoutineCard.Card as="div" active>
+          <RoutineCard.Main>
+            <RoutineCard.Title>{todaysRoutine.title}</RoutineCard.Title>
+            <RoutineCard.Description>{todaysRoutine.description}</RoutineCard.Description>
+          </RoutineCard.Main>
+          <RoutineCard.Details>
+            <RoutineCard.Detail>
+              {todaysRoutine.exerciseCount} {todaysRoutine.exerciseCount > 1 ? 'exercícios' : 'exercício'}
+            </RoutineCard.Detail>
+            <RoutineCard.Detail>
+              Est.: {todaysRoutine.estimatedMinutes} min
+            </RoutineCard.Detail>
+          </RoutineCard.Details>
+          <RoutineCard.Actions>
+            <RoutineCard.Action type="start" to="#" />
+          </RoutineCard.Actions>
+        </RoutineCard.Card>
+        <h2 className="font-montserrat text-xl text-light-silver">Histórico de treinos:</h2>
+        <ul className="flex flex-col gap-2">
+          {routinesHistory.map(routine =>
+            <RoutineCard.Card as="li" active={false}>
+              <RoutineCard.Main>
+                <RoutineCard.Title>{routine.title}</RoutineCard.Title>
+                <RoutineCard.Description>{routine.description}</RoutineCard.Description>
+              </RoutineCard.Main>
+              <RoutineCard.Details>
+                <RoutineCard.Detail>
+                  {routine.date} - {routine.minutesElapsed} min
+                </RoutineCard.Detail>
+              </RoutineCard.Details>
+            </RoutineCard.Card>
+          )}
+        </ul>
+      </main>
       <NavMenu />
-    </main>
+    </>
   )
 }

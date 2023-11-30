@@ -8,7 +8,7 @@ export default function NavMenu() {
   return (
     <NavMenuBar>
       <NavMenuIcon to='/'><FaHome /></NavMenuIcon>
-      <NavMenuIcon to='/rotinas'><CgGym /></NavMenuIcon>
+      <NavMenuIcon to='/treinos'><CgGym /></NavMenuIcon>
       {/* <NavMenuIcon to='/evolucao'></NavMenuIcon> */}
       <NavMenuIcon to='/configuracao'><FaCog /></NavMenuIcon>
       <NavMenuIcon to='/perfil'><FaUser /></NavMenuIcon>
