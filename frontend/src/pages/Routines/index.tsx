@@ -1,5 +1,6 @@
 import { RoutineCard } from "../../components/RoutineCard";
 import NavMenu from "../../components/NavMenu";
+import AddButton from "../../components/AddButton";
 
 export default function RoutinesPage() {
   //mockup
@@ -60,8 +61,8 @@ export default function RoutinesPage() {
             </RoutineCard.Card>
           )}
         </ul>
+        <AddButton to="/treinos">Novo treino</AddButton>
       </main>
-
       <NavMenu />
     </>
   )
