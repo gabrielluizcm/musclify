@@ -4,11 +4,12 @@ import { FaChevronLeft } from 'react-icons/fa';
 
 import { RoutineCard } from '../../components/RoutineCard';
 import AddButton from '../../components/AddButton';
+import NavMenu from '../../components/NavMenu';
 
 export default function RoutineDetails() {
   const params = useParams();
   // mockup
-  const exercices = [
+  const exercises = [
     {
       id: '5584ab7e-c87d-401f-a198-a0f71bca65c2',
       name: 'Supino reto',
@@ -72,42 +73,46 @@ export default function RoutineDetails() {
   }, []);
 
   return (
-    <main className="h-full w-full md:w-1/3 flex flex-col gap-3 py-5">
-      <div className="flex items-center gap-3">
-        <Link to='/treinos'
-          className='text-2xl text-lavander-indigo hover:text-lavander-indigo/75 transition-all'>
-          <FaChevronLeft />
-        </Link>
-        <input
-          type='text'
-          className="font-montserrat text-2xl text-light-silver border-none bg-transparent outline-none"
-          autoFocus={!params.id}
-          value={routineName}
-          onChange={evt => setRoutineName(evt.currentTarget.value)} />
-      </div>
-      <ul className="flex flex-col gap-2">
-        {exercices.map(exercise =>
-          <RoutineCard.Card as='li' active={true}>
-            <RoutineCard.Main>
-              <RoutineCard.Title>{exercise.name}</RoutineCard.Title>
-            </RoutineCard.Main>
-            <RoutineCard.Details>
-              <RoutineCard.Detail>
-                {exercise.series.toString()}x{exercise.reps && exercise.reps.toString() + ' reps'}
-              </RoutineCard.Detail>
-              <RoutineCard.Detail>
-                {exercise.weight && exercise.weight.toString() + ' kg'} {exercise.time}
-              </RoutineCard.Detail>
-            </RoutineCard.Details>
-            <RoutineCard.Actions>
-              <RoutineCard.Action as='button' onClick={() => console.log(`exclui ${exercise.id}`)} type='delete' />
-            </RoutineCard.Actions>
-          </RoutineCard.Card>
-        )}
-      </ul>
-      <AddButton as='button' onClick={() => console.log('abre modal exercicio')}>
-        Novo exercício
-      </AddButton>
-    </main>
+    <>
+      <main className="h-full w-full md:w-1/3 flex flex-col gap-3 py-5">
+        <div className="flex items-center gap-3">
+          <Link to='/treinos'
+            className='text-2xl text-lavander-indigo hover:text-lavander-indigo/75 transition-all'>
+            <FaChevronLeft />
+          </Link>
+          <input
+            type='text'
+            className="font-montserrat text-2xl text-light-silver border-none bg-transparent outline-none"
+            autoFocus={!params.id}
+            value={routineName}
+            onChange={evt => setRoutineName(evt.currentTarget.value)} />
+        </div>
+        <ul className="flex flex-col gap-2">
+          {exercises.map(exercise =>
+            <RoutineCard.Card as='li' active={true} key={exercise.id}>
+              <RoutineCard.Main>
+                <RoutineCard.Title>{exercise.name}</RoutineCard.Title>
+              </RoutineCard.Main>
+              <RoutineCard.Details>
+                <RoutineCard.Detail>
+                  {exercise.series.toString()}x{exercise.reps && exercise.reps.toString() + ' reps'}
+                </RoutineCard.Detail>
+                <RoutineCard.Detail>
+                  {exercise.weight && exercise.weight.toString() + ' kg'} {exercise.time}
+                </RoutineCard.Detail>
+              </RoutineCard.Details>
+              <RoutineCard.Actions>
+                <RoutineCard.Action as='button' onClick={() => console.log(`exclui ${exercise.id}`)} type='delete' />
+              </RoutineCard.Actions>
+            </RoutineCard.Card>
+          )}
+        </ul>
+        <AddButton as='button' onClick={() => console.log('abre modal exercicio')}>
+          Novo exercício
+        </AddButton>
+      </main>
+      <NavMenu />
+    </>
+
   )
 }

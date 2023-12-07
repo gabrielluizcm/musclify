@@ -41,7 +41,7 @@ export default function RoutinesPage() {
         <h1 className="font-montserrat text-2xl text-light-silver">Meus treinos</h1>
         <ul className="flex flex-col gap-2">
           {myRoutines.map(routine =>
-            <RoutineCard.Card as="li" active={true}>
+            <RoutineCard.Card as="li" active={true} key={routine.id}>
               <RoutineCard.Main>
                 <RoutineCard.Title>{routine.title}</RoutineCard.Title>
                 <RoutineCard.Description>{routine.description}</RoutineCard.Description>
