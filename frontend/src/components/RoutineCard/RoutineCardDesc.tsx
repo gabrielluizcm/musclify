@@ -1,4 +1,4 @@
-export default function RoutineCardDesc({ children }: { children: string }) {
+export default function RoutineCardDesc({ children }: { children: React.ReactNode }) {
   return (
     <h4 className="text-base">
       {children}

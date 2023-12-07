@@ -1,10 +1,14 @@
 import { FaPlay, FaTrash } from 'react-icons/fa';
 import { MdEdit } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+
 
 type RoutineCardActionProps = {
   type: 'start' | 'edit' | 'delete';
-  to: string;
-}
+} & (
+    { as: 'link'; to: string; } |
+    { as: 'button'; onClick: () => void; }
+  )
 
 export default function RoutineCardAction(props: RoutineCardActionProps) {
   let classes = '';
@@ -25,8 +29,16 @@ export default function RoutineCardAction(props: RoutineCardActionProps) {
   }
 
   return (
-    <a className={`rounded-lg ${classes}`} href={props.to}>
-      <Icon />
-    </a>
+    <>
+      {props.as === 'link' ?
+        <Link className={`rounded-lg transition-all ${classes}`} to={props.to}>
+          <Icon />
+        </Link> :
+        <button className={`rounded-lg transition-all ${classes}`} onClick={props.onClick}>
+          <Icon />
+        </button>
+      }
+    </>
+
   );
 }
