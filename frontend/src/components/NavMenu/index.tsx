@@ -1,4 +1,4 @@
-import { FaHome, FaCog, FaUser } from 'react-icons/fa';
+import { FaHome, FaUser } from 'react-icons/fa';
 import { CgGym } from 'react-icons/cg';
 
 import NavMenuBar from "./NavMenuBar";
@@ -10,7 +10,7 @@ export default function NavMenu() {
       <NavMenuIcon to='/'><FaHome /></NavMenuIcon>
       <NavMenuIcon to='/treinos'><CgGym /></NavMenuIcon>
       {/* <NavMenuIcon to='/evolucao'></NavMenuIcon> */}
-      <NavMenuIcon to='/configuracao'><FaCog /></NavMenuIcon>
+      {/* <NavMenuIcon to='/configuracao'><FaCog /></NavMenuIcon> */}
       <NavMenuIcon to='/perfil'><FaUser /></NavMenuIcon>
     </NavMenuBar>
   )

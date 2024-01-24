@@ -24,7 +24,7 @@ function Weekdays() {
   )
 }
 
-export default function Home() {
+export default function HomePage() {
   //mockups
   const todaysRoutine = {
     id: '7628e2dd-f3f5-40e1-be4a-e01a17e1d28a',

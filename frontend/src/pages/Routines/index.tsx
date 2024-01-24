@@ -55,7 +55,7 @@ export default function RoutinesPage() {
                 </RoutineCard.Detail>
               </RoutineCard.Details>
               <RoutineCard.Actions>
-                <RoutineCard.Action as='link' to={`/treinos/${routine.id}/editar`} type="edit" />
+                <RoutineCard.Action as='link' to={`/treino/${routine.id}`} type="edit" />
                 <RoutineCard.Action as='button' onClick={() => console.log(`delete ${routine.id}`)} type="delete" />
               </RoutineCard.Actions>
             </RoutineCard.Card>

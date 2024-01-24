@@ -5,8 +5,9 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { RoutineCard } from '../../components/RoutineCard';
 import AddButton from '../../components/AddButton';
 import NavMenu from '../../components/NavMenu';
+import BorderlessInput from '../../components/BorderlessInput';
 
-export default function RoutineDetails() {
+export default function RoutineDetailsPage() {
   const params = useParams();
   // mockup
   const exercises = [
@@ -80,12 +81,10 @@ export default function RoutineDetails() {
             className='text-2xl text-lavander-indigo hover:text-lavander-indigo/75 transition-all'>
             <FaChevronLeft />
           </Link>
-          <input
-            type='text'
-            className="font-montserrat text-2xl text-light-silver border-none bg-transparent outline-none"
+          <BorderlessInput
             autoFocus={!params.id}
             value={routineName}
-            onChange={evt => setRoutineName(evt.currentTarget.value)} />
+            onChange={val => setRoutineName(val)} />
         </div>
         <ul className="flex flex-col gap-2">
           {exercises.map(exercise =>
