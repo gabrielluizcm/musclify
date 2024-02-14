@@ -34,6 +34,7 @@ model Routine {
   created_at        DateTime   @default(now())
   updated_at        DateTime   @updatedAt
   Exercises         Exercise[]
+  Historic          History[]
 }
 
 model Exercise {
@@ -43,4 +44,11 @@ model Exercise {
   title       String
   description String?
   tags        Json?
+}
+
+model History {
+  id         String   @id @default(uuid())
+  routine    Routine  @relation(fields: [routine_id], references: [id])
+  routine_id String
+  created_at DateTime @default(now())
 }
